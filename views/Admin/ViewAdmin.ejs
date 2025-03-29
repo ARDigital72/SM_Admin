@@ -1,0 +1,92 @@
+<%- include('../layouts/header.ejs')%>
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>General Tables</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">View Admin</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Table with hoverable rows</h5>
+
+                            <!-- Table with hoverable rows -->
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">200</th>
+                                        <th scope="col">400</th>
+                                        <th scope="col">403</th>
+                                        <th scope="col">404</th>
+                                        <th scope="col">500</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%AdminData.map((item,i)=>{%>
+                                        <tr>
+                                            <td scope="col">
+                                                <%=i+1%>
+                                            </td>
+                                            <td scope="col">
+                                                <%=item.name%>
+                                            </td>
+                                            <td scope="col">
+                                                <%=item.email%>
+                                            </td>
+                                            <td>
+                                                <%let id = item.id%>
+                                                <input class="form-check-input" type="radio" name="error_<%=item.id%>" id="<%=item.id%>" value="200" <% if(item.err==200){ %><%='checked'%><%}%> onchange="error(id,200)">
+                                            </td>
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="error_<%=item.id%>" id="<%=item.id%>" value="400" <% if(item.err==400){ %><%='checked'%><%}%> onchange="error(id,400)">
+                                            </td>
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="error_<%=item.id%>" id="<%=item.id%>" value="403" <% if(item.err==403){ %><%='checked'%><%}%> onchange="error(id,403)">
+                                            </td>
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="error_<%=item.id%>" id="<%=item.id%>" value="404" <% if(item.err==404){ %><%='checked'%><%}%> onchange="error(id,404)">
+                                            </td>
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="error_<%=item.id%>" id="<%=item.id%>" value="500" <% if(item.err==500){ %><%='checked'%><%}%> onchange="error(id,500)">
+                                            </td>
+                                            <td scope="col">
+                                                <%if(item.status){%>
+                                                    <a href="/status?id=<%=item.id%>&status=false"
+                                                        class="btn btn-success">Active</a>
+                                                    <%}else{%>
+                                                        <a href="/status?id=<%=item.id%>&status=true"
+                                                            class="btn btn-danger">Deactive</a>
+                                                        <%}%>
+                                            </td>
+                                            <td scope="col"><a href="/deleteadmin/?id=<%=item.id%>" class="btn btn-danger">Delete</a></td>
+                                        </tr>
+                                        <%})%>
+                                </tbody>
+                            </table>
+                            <!-- End Table with hoverable rows -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('../layouts/footer.ejs')%>

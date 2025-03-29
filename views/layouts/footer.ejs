@@ -1,0 +1,83 @@
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>AR SendMail</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+    Designed by <a href="https://linktr.ee/ardigital72?utm_source=linktree_admin_share">AR</a>
+  </div>
+  <div class="text-center mt-3">
+    <a href="https://www.instagram.com/ar_deals_72?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="mx-1"><i class="ri-instagram-fill fs-5"></i></a>
+    <a href="javascript:void(0)" class="mx-1"><i class="ri-youtube-fill fs-5"></i></a>
+    <a href="javascript:void(0)" class="mx-1"><i class="ri-telegram-fill fs-5"></i></a>
+    <a href="javascript:void(0)" class="mx-1"><i class="ri-linkedin-box-fill fs-5"></i></a>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/chart.js/chart.umd.js"></script>
+<script src="/vendor/echarts/echarts.min.js"></script>
+<script src="/vendor/quill/quill.js"></script>
+<script src="/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/vendor/tinymce/tinymce.min.js"></script>
+<script src="/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/js/main.js"></script>
+
+
+<!-- ajex cdn -->
+<script src="/js/jquery.min.js"></script>
+
+<script>
+  function selectcity() {
+    let State = document.getElementById('State').value;
+
+    $.ajax({
+      url: '/sendmail/findcity',
+      data: {
+        State
+      },
+      success: function (res) {
+        $('#city').html(res)
+      }
+    });
+  }
+
+  function Numberofmail() {
+    let State = document.getElementById('State').value;
+    let City = document.getElementById('city').value;
+
+    $.ajax({
+      url: '/sendmail/numberofcity',
+      data: {
+        State,City
+      },
+      success: function (res) {
+        $('#mail').html(res)
+      }
+    });
+  }
+
+  function error(id,port) {
+    $.ajax({
+      url: '/error',
+      data: {
+        port,id
+      }
+    });
+  }
+</script>
+
+</body>
+
+</html>
