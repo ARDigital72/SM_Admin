@@ -73,18 +73,17 @@ module.exports.AddState = async (req, res) => {
 module.exports.ViewState = async (req, res) => {
     try {
         let state = await StateModel.find()
-        let email = await EmailModel.find().populate('city').populate('state').exec()
-        let index = 0
-        state.forEach(item => {
-            let NumberOfMail = 0
-            email.forEach(eitem => {
-                if (item.id == eitem.state.id) {
-                    NumberOfMail++;
-                }
-
-            })
-            state[index++].mail = NumberOfMail
-        });
+        // let email = await EmailModel.find().populate('city').populate('state').exec()
+        // let index = 0
+        // state.forEach(item => {
+        //     let NumberOfMail = 0
+        //     email.forEach(eitem => {
+        //         if (item.id == eitem.state.id) {
+        //             NumberOfMail++;
+        //         }
+        //     })
+        //     state[index++].mail = NumberOfMail
+        // });
 
         await res.render('findingdata/ViewState', {
             user: req.user,
