@@ -197,26 +197,38 @@ module.exports.AddCity = async (req, res) => {
 }
 
 module.exports.ViewCity = async (req, res) => {
+    try {
+        // Fetch cities and emails in parallel for better performance
+        const [cities, emails] = await Promise.all([
+            CityModel.find().populate('state').exec(),
+            EmailModel.find().populate('city').populate('state').exec()
+        ]);
 
-    let city = await CityModel.find().populate('state').exec()
-    let email = await EmailModel.find().populate('city').populate('state').exec()
+        // Create a Map to store email count per city
+        const emailCountMap = new Map();
 
-    let index = 0
-    city.forEach(item => {
-        let NumberOfMail = 0
-        email.forEach(eitem => {
-            if (item.id == eitem.city.id) {
-                NumberOfMail++;
+        emails.forEach(({ city }) => {
+            if (city && city.id) {
+                emailCountMap.set(city.id, (emailCountMap.get(city.id) || 0) + 1);
             }
-        })
-        city[index++].mail = NumberOfMail
-    });
+        });
 
-    res.render('findingdata/ViewCity', {
-        user: req.user,
-        city
-    })
-}
+        // Attach email count to each city and sort by number of emails
+        const sortedCities = cities.map(city => ({
+            ...city.toObject(),
+            mail: emailCountMap.get(city.id) || 0
+        })).sort((a, b) => b.mail - a.mail); // Sorting in descending order by mail count
+
+        res.render('findingdata/ViewCity', {
+            user: req.user,
+            city: sortedCities
+        });
+
+    } catch (err) {
+        console.error('Error fetching city data:', err);
+        res.redirect('back');
+    }
+};
 
 module.exports.UpdateCityPage = async (req, res) => {
     try {
