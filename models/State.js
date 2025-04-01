@@ -6,8 +6,7 @@ const stateSchma = mongose.Schema({
     }, city: {
         type: Array
     }, status: {
-        type: Boolean,
-        default: true
+        type: Boolean
     }
 }, {
     timestamps: true

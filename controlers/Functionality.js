@@ -49,6 +49,7 @@ module.exports.AddState = async (req, res) => {
     try {
         let checkState = await StateModel.find({ state: req.body.state }).countDocuments()
         if (!checkState) {
+            req.body.status = true
             let CreateState = await StateModel.create(req.body)
             if (CreateState) {
                 console.log('state add successfully');
