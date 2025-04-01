@@ -85,7 +85,7 @@ module.exports.ViewState = async (req, res) => {
         //     })
         //     state[index++].mail = NumberOfMail
         // });
-
+        console.log(state)
         await res.render('findingdata/ViewState', {
             user: req.user,
             state
