@@ -17,7 +17,9 @@ routes.get('/addstatepage',(req,res)=>{
 
 routes.post('/addstate',functionalityCtrl.AddState)
 
-routes.get('/viewstate', functionalityCtrl.ViewState)
+// routes.get('/viewstate', functionalityCtrl.ViewState)
+
+routes.get('/',functionalityCtrl.ViewState)
 
 routes.get('/updatestatepage',functionalityCtrl.UpdateStatePage)
 
