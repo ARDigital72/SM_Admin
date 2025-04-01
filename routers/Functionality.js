@@ -19,10 +19,8 @@ routes.post('/addstate', functionalityCtrl.AddState)
 
 // routes.get('/viewstate', functionalityCtrl.ViewState)
 
-routes.get('/', (req,res)=> {
-    return res.render('area/viewstate', {
-        user: req.user
-    })
+routes.get('/', (req, res) => {
+    res.render('area/CreateState', { user: req.user })
 })
 
 routes.get('/updatestatepage', functionalityCtrl.UpdateStatePage)
