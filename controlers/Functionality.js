@@ -85,7 +85,6 @@ module.exports.ViewState = async (req, res) => {
             })
             state[index++].mail = NumberOfMail
         });
-        // console.log(state)
         await res.render('area/state', {
             user: req.user,state
         })
@@ -200,17 +199,6 @@ module.exports.ViewCity = async (req, res) => {
     let city = await CityModel.find().populate('state').exec()
     let email = await EmailModel.find().populate('city').exec()
 
-    let index = 0
-    // city.forEach(item => {
-    //     let NumberOfMail = 0
-    //     email.forEach(eitem => {
-    //         if (item.id == eitem.city.id) {
-    //             NumberOfMail++;
-    //         }
-    //     })
-    //     city[index++].mail = NumberOfMail
-    // })
-
     for (i = 0; i < city.length; i++) {
         let NumberOfMail = 0;
         for (j = 0; j < email.length; j++) {
@@ -221,7 +209,7 @@ module.exports.ViewCity = async (req, res) => {
         }
     }
 
-    res.render('area/ViewCity', {
+    res.render('area/city', {
         user: req.user,
         city
     })
