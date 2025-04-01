@@ -20,7 +20,7 @@ routes.post('/addstate', functionalityCtrl.AddState)
 // routes.get('/viewstate', functionalityCtrl.ViewState)
 
 routes.get('/', (req,res)=> {
-    res.render('area/ViewState', {
+    res.render('area/viewstate', {
         user: req.user
     })
 })
