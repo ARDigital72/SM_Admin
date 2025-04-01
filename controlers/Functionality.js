@@ -85,8 +85,8 @@ module.exports.ViewState = async (req, res) => {
         //     })
         //     state[index++].mail = NumberOfMail
         // });
-        console.log(state)
-        await res.render('findingdata/ViewState', {
+        // console.log(state)
+        await res.render('area/ViewState', {
             user: req.user
         })
     }
@@ -99,7 +99,7 @@ module.exports.ViewState = async (req, res) => {
 module.exports.UpdateStatePage = async (req, res) => {
     try {
         let StateData = await StateModel.findById(req.query.id)
-        return res.render('findingdata/editstate', {
+        return res.render('area/editstate', {
             user: req.user,
             StateData
         })
@@ -221,7 +221,7 @@ module.exports.ViewCity = async (req, res) => {
         }
     }
 
-    res.render('findingdata/ViewCity', {
+    res.render('area/ViewCity', {
         user: req.user,
         city
     })
@@ -231,7 +231,7 @@ module.exports.UpdateCityPage = async (req, res) => {
     try {
         let state = await StateModel.find().populate('state').exec()
         let CityData = await CityModel.findById(req.query.id)
-        return res.render('findingdata/editcity', {
+        return res.render('area/editcity', {
             user: req.user,
             CityData, state
         })

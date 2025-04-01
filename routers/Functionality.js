@@ -10,7 +10,7 @@ const StateModel = require('../models/State')
 
 //State
 routes.get('/addstatepage',(req,res)=>{
-    res.render('findingdata/CreateState',{user: req.user})
+    res.render('area/CreateState',{user: req.user})
 })
 
 // routes.get('/addstateforalll',functionalityCtrl.addstateforalll)
@@ -31,7 +31,7 @@ routes.get('/sstatus',functionalityCtrl.SStatus)
 //city
 routes.get('/addcitypage', async (req, res) => {
     let state = await StateModel.find({ status: true })
-    res.render('findingdata/CreateCity', {
+    res.render('area/CreateCity', {
         user: req.user,
         state
     })
