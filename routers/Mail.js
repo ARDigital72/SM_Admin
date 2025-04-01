@@ -12,6 +12,8 @@ routes.get('/addemailpage', passport.checkAuthUser, SendMailCtrl.AddMailPage)
 
 routes.post('/addmail', passport.checkAuthUser, SendMailCtrl.AddMail)
 
+routes.get('/viewemail', passport.checkAuthUser, SendMailCtrl.ViewEmail)
+
 routes.get('/deletemail', passport.checkAuthUser, SendMailCtrl.DeleteMail)
 
 
