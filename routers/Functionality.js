@@ -6,14 +6,12 @@ const functionalityCtrl = require('../controlers/Functionality')
 
 const StateModel = require('../models/State')
 
-// routes.get('/', functionalityCtrl.AllData)
+// routes.get('/', functionalityCtrl.addstateforall)
 
 //State
 routes.get('/addstatepage',(req,res)=>{
     res.render('area/CreateState',{user: req.user})
 })
-
-// routes.get('/addstateforalll',functionalityCtrl.addstateforalll)
 
 routes.post('/addstate',functionalityCtrl.AddState)
 

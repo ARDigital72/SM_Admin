@@ -2,40 +2,37 @@ const StateModel = require('../models/State')
 const CityModel = require('../models/City')
 const EmailModel = require('../models/EmailModel')
 
-// module.exports.AllData = (req, res) => {
-//     console.log('ok');
-// }
 
 //state
-// module.exports.addstateforall=async(req,res)=>{
+// module.exports.addstateforall = async (req, res) => {
 //     try {
 //         const indiaStates = [
-//             "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
-//             "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", 
-//             "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
-//             "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", 
-//             "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", 
+//             "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+//             "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+//             "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+//             "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+//             "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
 //             "Uttar Pradesh", "Uttarakhand", "West Bengal"
-//           ];
+//         ];
 
 
-//           indiaStates.map(async(item,i)=>{
-//               let checkState = await StateModel.find({ state: item }).countDocuments()
-//               if (!checkState) {
-//                   let CreateState = await StateModel.create({ state: item })
-//                   if (CreateState) {
-//                       console.log('state add successfully');
-//                   }
-//                   else {
-//                       console.log('something wrong');
-//                   }
-//               }
-//               else {
-//                   console.log('state alredy created');
+//         indiaStates.map(async (item, i) => {
+//             let checkState = await StateModel.find({ state: item }).countDocuments()
+//             if (!checkState) {
+//                 let CreateState = await StateModel.create({ state: item, status: true })
+//                 if (CreateState) {
+//                     console.log('state add successfully');
 //                 }
-//             })
+//                 else {
+//                     console.log('something wrong');
+//                 }
+//             }
+//             else {
+//                 console.log('state alredy created');
+//             }
+//         })
 
-//             return res.redirect('back')
+//         return res.redirect('back')
 
 //     }
 //     catch (err) {
@@ -43,6 +40,7 @@ const EmailModel = require('../models/EmailModel')
 //         return res.redirect('back')
 //     }
 // }
+
 
 
 module.exports.AddState = async (req, res) => {
@@ -75,18 +73,17 @@ module.exports.ViewState = async (req, res) => {
     try {
         let state = await StateModel.find()
         let email = await EmailModel.find().populate('city').populate('state').exec()
-        let index = 0
-        state.forEach(item => {
+        state.forEach((item, i) => {
             let NumberOfMail = 0
             email.forEach(eitem => {
                 if (item.id == eitem.state.id) {
                     NumberOfMail++;
                 }
             })
-            state[index++].mail = NumberOfMail
+            state[i].mail =NumberOfMail
         });
         await res.render('area/state', {
-            user: req.user,state
+            user: req.user, state
         })
     }
     catch (err) {
