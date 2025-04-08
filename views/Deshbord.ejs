@@ -15,7 +15,7 @@
       <div class="row">
 
         <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
+          <div class="card info-card mail-card">
             <div class="card-body">
               <h5 class="card-title">Total Mail</h5>
               <div class="d-flex align-items-center">
@@ -34,7 +34,61 @@
         </div>
 
         <div class="col-xxl-4 col-md-6">
-          <div class="card info-card customers-card">
+          <div class="card info-card calendar-card">
+            <div class="card-body">
+              <h5 class="card-title">Today</h5>
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-calendar-event"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>
+                    <%=TodaySend%>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card year-card">
+            <div class="card-body">
+              <h5 class="card-title">Year</h5>
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-calendar3"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>
+                    <%=TodaySend%>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="card info-card state-card">
+            <div class="card-body">
+              <h5 class="card-title">state</h5>
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-geo-alt"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>
+                    <%=CountState%>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="card info-card city-card">
             <div class="card-body">
               <h5 class="card-title">City</h5>
               <div class="d-flex align-items-center">
@@ -43,26 +97,7 @@
                 </div>
                 <div class="ps-3">
                   <h6>
-                    <%=today%> / 500
-                  </h6>
-                  <span class="text-danger small pt-1 fw-bold"><%=500-parseInt(today)%> Left</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card revenue-card">
-            <div class="card-body">
-              <h5 class="card-title">State</h5>
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-geo-alt"></i>
-                </div>
-                <div class="ps-3">
-                  <h6>
-                    <%=year%>
+                    <%=CountCity%>
                   </h6>
                 </div>
               </div>
@@ -107,7 +142,7 @@
         </div>
     
         <div class="col-md-6 col-12">
-          <div class="card info-card sales-card">
+          <div class="card info-card mail-card">
             <div class="card-body">
               <h5 class="card-title">Total Mail</h5>
               <div class="d-flex align-items-center py-3">

@@ -6,7 +6,7 @@ const AdminModel = require('../models/AdminModel')
 passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async function (email, password, done) {
-    let adminData = await AdminModel.findOne({ email: email })
+    let adminData = await AdminModel.findOne({ email: email,role:'SendM@ilwith@R' })
     if (adminData) {
         if (adminData.password == password) {
             return done(null, adminData)

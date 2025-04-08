@@ -41,6 +41,70 @@ const EmailModel = require('../models/EmailModel')
 //     }
 // }
 
+// module.exports.AddCity = async (req, res) => {
+//     try {
+//         const allDistricts = [
+//             "Ahmedabad",
+//             "Amreli",
+//             "Anand",
+//             "Aravalli",
+//             "Banaskantha",
+//             "Bharuch",
+//             "Bhavnagar",
+//             "Botad",
+//             "Chhota Udaipur",
+//             "Dahod",
+//             "Dang",
+//             "Devbhoomi Dwarka",
+//             "Gandhinagar",
+//             "Gir Somnath",
+//             "Jamnagar",
+//             "Junagadh",
+//             "Kheda",
+//             "Kutch",
+//             "Mahisagar",
+//             "Mehsana",
+//             "Morbi",
+//             "Narmada",
+//             "Navsari",
+//             "Panchmahal",
+//             "Patan",
+//             "Porbandar",
+//             "Rajkot",
+//             "Sabarkantha",
+//             "Surat",
+//             "Surendranagar",
+//             "Tapi",
+//             "Vadodara",
+//             "Valsad"
+//         ];
+
+//         for(i=0;i<allDistricts.length;i++){
+//             console.log(allDistricts[i],'==' ,i);
+//             req.body.city = allDistricts[i]
+
+//             let CreateCity = await CityModel.create(req.body)
+//             if (CreateCity) {
+//                 let allstatecity = await StateModel.findById(req.body.state)
+//                 addcity = allstatecity.city
+//                 addcity.push(CreateCity.id)
+
+//                 await StateModel.findByIdAndUpdate(req.body.state, { city: addcity })
+
+//                 console.log('City add successfully');
+//             }
+//             else {
+//                 console.log('City alredy created');
+//                 // return res.redirect('back')
+//             }
+//         }
+//         console.log('complate');
+//     }
+//     catch (err) {
+//         console.log(err);
+//         return res.redirect('back')
+//     }
+// }
 
 
 module.exports.AddState = async (req, res) => {

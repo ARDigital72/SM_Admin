@@ -111,19 +111,22 @@ module.exports.Deshbord = async (req, res) => {
 
         // Sending Mail
         let today = new Date()
-        let Mail = (await EmailActivity.find({ user: req.user.id }))[0]
-        if (Mail.updatedAt.toLocaleDateString() != today.toLocaleDateString()) {
-            await EmailActivity.updateOne({ user: req.user.id }, { today: 0 })
-        }
+        let Mail = await EmailActivity.find()
+        let TodaySend = 0
+        Mail.map((item,i)=>{
+            if(item.updatedAt.toLocaleDateString() == today.toLocaleDateString()) {
+            TodaySend = TodaySend + parseInt(item.today)
+            }
+        })
         Mail = await EmailActivity.findById(Mail.id)
 
-        const State = await StateModel.find({ status: true })
-        return res.render('Deshbord', { user: req.user, CountMail, year: Mail.year, today: Mail.today, State })
-    }
+    const State = await StateModel.find({ status: true })
+    return res.render('Deshbord', { user: req.user, CountMail, CountState, CountCity, TodaySend,State })
+}
     catch (err) {
-        console.log(err);
-        return res.redirect('back')
-    }
+    console.log(err);
+    return res.redirect('back')
+}
 }
 
 module.exports.Profile = async (req, res) => {
@@ -195,7 +198,7 @@ module.exports.ViewAdmin = async (req, res) => {
         for (i = 0; i < AdminData.length; i++) {
             AdminData[i].err = (await error.find({ user: AdminData[i].id }))[0].error
         }
-        
+
         return res.render('Admin/ViewAdmin', {
             user: req.user,
             AdminData
@@ -210,11 +213,15 @@ module.exports.ViewAdmin = async (req, res) => {
 
 module.exports.DeleteAdmin = async (req, res) => {
     try {
-        let singledata = await AdminModel.findById(req.query.id)
-        let oldpath = ''
-        if (singledata.image) {
-            oldpath = path.join(__dirname, '..', singledata.image);
-            await fs.unlinkSync(oldpath)
+        try{
+            let singledata = await AdminModel.findById(req.query.id)
+            let oldpath = ''
+            if (singledata.image) {
+                oldpath = path.join(__dirname, '..', singledata.image);
+                await fs.unlinkSync(oldpath)
+            }
+        }catch(err){
+            console.log('something wrong');
         }
 
         let DeleteAdmin = await AdminModel.findByIdAndDelete(req.query.id)
@@ -256,7 +263,7 @@ module.exports.AdminStatus = async (req, res) => {
 
 module.exports.SetError = async (req, res) => {
     try {
-        await error.updateOne({user:req.query.id},{error:parseInt(req.query.port)})
+        await error.updateOne({ user: req.query.id }, { error: parseInt(req.query.port) })
     }
     catch (err) {
         console.log(err);

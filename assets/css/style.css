@@ -820,19 +820,29 @@ h6 {
   flex-grow: 0;
 }
 
-.dashboard .sales-card .card-icon {
+.dashboard .mail-card .card-icon {
   color: #4154f1;
   background: #f6f6fe;
 }
 
-.dashboard .revenue-card .card-icon {
+.dashboard .calendar-card .card-icon {
   color: #2eca6a;
   background: #e0f8e9;
 }
 
-.dashboard .customers-card .card-icon {
+.dashboard .year-card .card-icon {
   color: #ff771d;
   background: #ffecdf;
+}
+
+.dashboard .state-card .card-icon {
+  color: #8e24aa ;
+  background: #f3e5f5 ;
+}
+
+.dashboard .city-card .card-icon {
+  color: #1e88e5 ;
+  background: #e3f2fd ;
 }
 
 /* Activity */
