@@ -1,6 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 
+const bcrypt = require('bcrypt')
+
 const AdminModel = require('../models/AdminModel')
 const EmailModel = require('../models/EmailModel')
 const EmailActivity = require('../models/EmailActivity')
@@ -56,27 +58,29 @@ module.exports.ChangPasswordPage = async (req, res) => {
 
 module.exports.ChangPassword = async (req, res) => {
     try {
-        if (req.user.password == req.body.current_password) {
-            if (req.body.password == req.body.conform_password) {
-                if (req.user.password != req.body.password) {
-                    let ChangPassword = await AdminModel.findByIdAndUpdate(req.user.id, { password: req.body.password })
-                    if (ChangPassword) {
+        let currentpassword = await bcrypt.compare(req.body.current_password, req.user.password)
+        if(currentpassword){
+            if(req.body.current_password != req.body.password){
+                if(req.body.password == req.body.conform_password){
+                    req.body.password = await bcrypt.hash(req.body.password,10)
+                    let changpassword = await AdminModel.findByIdAndUpdate(req.user.id, { password: req.body.password })
+                    if(changpassword){
                         console.log('password chang successfully');
                         return res.redirect('/signout')
-                    } else {
-                        console.log('something wrong');
+                    }else{
+                        console.log('password not chang');
                         return res.redirect('back')
                     }
-                } else {
-                    console.log('old and current password is same')
+                }else{
+                    console.log('password and conform password is not match');
                     return res.redirect('back')
                 }
-            } else {
-                console.log('password is not match');
+            }else{
+                console.log('current and new password is match');
                 return res.redirect('back')
             }
-        } else {
-            console.log('wrong password');
+        }else{
+            console.log('current password is wrong');
             return res.redirect('back')
         }
     }
@@ -159,10 +163,7 @@ module.exports.InsertAdmin = async (req, res) => {
                 req.body.status = true
                 req.body.role = 'user'
 
-                if (req.file) {
-                    req.body.image = AdminModel.imgpath + '/' + req.file.filename;
-                }
-
+                req.body.password = await bcrypt.hash(req.body.password, 10)
                 let addadmin = await AdminModel.create(req.body)
                 if (addadmin) {
                     await EmailActivity.create({ user: addadmin.id, year: 0, today: 0 })

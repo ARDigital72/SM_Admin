@@ -28,7 +28,7 @@ routes.get('/profile', passport.checkAuthUser, mainCtrl.Profile)
 
 routes.get('/addadminpage', passport.checkAuthUser, mainCtrl.AddData)
 
-routes.post('/addadmin', AdminModel.uploadimg, mainCtrl.InsertAdmin)
+routes.post('/addadmin', mainCtrl.InsertAdmin)
 
 routes.get('/viewadmin', passport.checkAuthUser, mainCtrl.ViewAdmin)
 

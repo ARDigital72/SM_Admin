@@ -5,7 +5,7 @@ const StateModle = require('../models/State')
 const CityModle = require('../models/City')
 
 // const ExtraCounting = require('../models/ExtraCounting')
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 const Email = require('../models/EmailModel');
 
 
